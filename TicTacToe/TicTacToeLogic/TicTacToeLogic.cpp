@@ -2,7 +2,28 @@
 #include "TicTacToeLogic.h"
 
 
+TicTacToeLogic::TicTacToeLogic()
+{
+}
+
 TicTacToeLogic::TicTacToeLogic(int dim, int win)
+{
+	if (dim < win)
+		throw "Invalid dimensions!";
+	for (int line = 0; line < dim; ++line)
+	{
+		std::vector<Piece> aux;
+		for (int column = 0; column < dim; ++column)
+		{
+			aux.push_back(Piece::None);
+		}
+		m_board.push_back(aux);
+	}
+	m_winCount = win;
+	m_state = GameState::Playing;
+}
+
+void TicTacToeLogic::Configure(int dim, int win)
 {
 	if (dim < win)
 		throw "Invalid dimensions!";

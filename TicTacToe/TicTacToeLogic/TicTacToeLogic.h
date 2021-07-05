@@ -16,8 +16,9 @@ public:
 		XWon,
 		OWon
 	};
-
+	TicTacToeLogic();
 	TicTacToeLogic(int dim, int win);
+	void Configure(int dim, int win);
 
 	void SetX(int line, int column);
 	void SetO(int line, int column);
