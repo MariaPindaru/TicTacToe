@@ -1,7 +1,3 @@
-// TicTacToeLogic.cpp : Defines the functions for the static library.
-//
-
-#include "pch.h"
 
 #include "TicTacToeLogic.h"
 
@@ -19,7 +15,8 @@ TicTacToeLogic::TicTacToeLogic(int dim, int win)
 		}
 		m_board.push_back(aux);
 	}
-	state = GameState::Playing;
+	m_winCount = win;
+	m_state = GameState::Playing;
 }
 
 void TicTacToeLogic::SetX(int line, int column)
@@ -29,6 +26,7 @@ void TicTacToeLogic::SetX(int line, int column)
 	if (m_board[line][column] != Piece::None)
 		throw "Position unavailable!";
 	m_board[line][column] = Piece::X;
+	CheckGameState(line, column);
 }
 
 void TicTacToeLogic::SetO(int line, int column)
@@ -38,6 +36,7 @@ void TicTacToeLogic::SetO(int line, int column)
 	if (m_board[line][column] != Piece::None)
 		throw "Position unavailable!";
 	m_board[line][column] = Piece::O;
+	CheckGameState(line, column);
 }
 
 std::vector<std::vector<char>> TicTacToeLogic::GetBoard() const
@@ -60,21 +59,137 @@ std::vector<std::vector<char>> TicTacToeLogic::GetBoard() const
 	return board;
 }
 
-TicTacToeLogic::GameState TicTacToeLogic::CheckGameState()
+bool TicTacToeLogic::IsGameOver()
 {
-	if (XWon())
-		return GameState::XWon;
-	if (OWon())
-		return GameState::OWon;
-	return GameState::Playing;
-}
-
-bool TicTacToeLogic::XWon()
-{
+	if (m_state == GameState::OWon || m_state == GameState::XWon)
+		return true;
 	return false;
 }
 
-bool TicTacToeLogic::OWon()
+void TicTacToeLogic::CheckGameState(int line, int column)
 {
+	if (GameWon(line, column))
+	{
+		if (m_board[line][column] == Piece::X)
+			m_state = GameState::XWon;
+		else
+			m_state = GameState::OWon;
+		return;
+	}
+		
+	m_state = GameState::Playing;
+}
+
+bool TicTacToeLogic::GameWon(int lineIndex, int columnIndex)
+{
+	if (CheckLine(lineIndex, columnIndex) || CheckColumn(lineIndex, columnIndex) ||
+		CheckRightDiagonal(lineIndex, columnIndex) || CheckLeftDiagonal(lineIndex, columnIndex))
+		return true;
+
+	return false;
+
+}
+
+bool TicTacToeLogic::CheckColumn(int lineIndex, int columnIndex)
+{
+	int count = 0;
+	Piece piece = m_board[lineIndex][columnIndex];
+	for (int line = lineIndex; line >= 0; --line)
+	{
+		if (m_board[line][columnIndex] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
+	for (int line = lineIndex + 1; line < m_board.size(); ++line)
+	{
+		if (m_board[line][columnIndex] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
 	return false;
 }
+
+bool TicTacToeLogic::CheckLine(int lineIndex, int columnIndex)
+{
+	int count = 0;
+	Piece piece = m_board[lineIndex][columnIndex];
+	for (int column = lineIndex; column >= 0; --column)
+	{
+		if (m_board[lineIndex][column] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
+	for (int column = columnIndex + 1; column < m_board.size(); ++column)
+	{
+		if (m_board[lineIndex][column] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
+	return false;
+}
+
+bool TicTacToeLogic::CheckRightDiagonal(int lineIndex, int columnIndex)
+{
+	int count = 0;
+	Piece piece = m_board[lineIndex][columnIndex];
+
+	for (int line = lineIndex, column = columnIndex; line >= 0 && column < m_board.size(); --line, ++column)
+	{
+		if (m_board[line][column] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
+	for (int line = lineIndex + 1, column = columnIndex - 1; column >= 0 && line < m_board.size(); ++line, --column)
+	{
+		if (m_board[line][column] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
+	return false;
+}
+
+bool TicTacToeLogic::CheckLeftDiagonal(int lineIndex, int columnIndex)
+{
+	int count = 0;
+	Piece piece = m_board[lineIndex][columnIndex];
+
+	for (int line = lineIndex, column = columnIndex; line < m_board.size() && column < m_board.size(); ++line, ++column)
+	{
+		if (m_board[line][column] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
+	for (int line = lineIndex - 1, column = columnIndex - 1; column >= 0 && line >= 0 ; --line, --column)
+	{
+		if (m_board[line][column] == piece)
+			++count;
+		else
+			break;
+		if (count == m_winCount)
+			return true;
+	}
+
+	return false;
+}
+

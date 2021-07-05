@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TicTacToe", "TicTacToe\TicTacToe.vcxproj", "{7D4CA366-1171-4DE2-9ECB-5CF7383E0838}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3BEDFFC-AA35-45CF-9823-6713F07E8591} = {A3BEDFFC-AA35-45CF-9823-6713F07E8591}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TicTacToeLogic", "TicTacToeLogic\TicTacToeLogic.vcxproj", "{A3BEDFFC-AA35-45CF-9823-6713F07E8591}"
 EndProject
