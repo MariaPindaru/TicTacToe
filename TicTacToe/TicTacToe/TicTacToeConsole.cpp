@@ -45,7 +45,7 @@ void TicTacToeConsole::Run()
 	bool isXTurn = true;
 	Player currentPlayer;
 	PrintBoard();
-	while (m_bussinesLogic.IsGameOver() > 0)
+	while (m_bussinesLogic.GetGameState() == TicTacToeLogic::GameState::Playing)
 	{
 		
 		currentPlayer = isXTurn == true ? firstPlayer : secondPlayer;
@@ -72,7 +72,7 @@ void TicTacToeConsole::Run()
 		isXTurn = !isXTurn;
 	}
 
-	if (m_bussinesLogic.IsGameOver() == -1)
+	if (m_bussinesLogic.GetGameState() == TicTacToeLogic::GameState::Draw)
 	{
 		std::cout<<"Draw :)" << std::endl;
 	}
