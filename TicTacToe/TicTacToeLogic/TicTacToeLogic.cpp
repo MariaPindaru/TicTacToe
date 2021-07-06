@@ -14,11 +14,7 @@ void TicTacToeLogic::Configure(int dim, int win)
 		throw "Invalid dimensions!";
 	for (int line = 0; line < dim; ++line)
 	{
-		std::vector<Piece> aux;
-		for (int column = 0; column < dim; ++column)
-		{
-			aux.push_back(Piece::None);
-		}
+		std::vector<Piece> aux(dim, Piece::None);
 		m_board.push_back(aux);
 	}
 	m_winCount = win;
@@ -196,13 +192,12 @@ bool TicTacToeLogic::IsBoardFull()
 {
 	for (auto line : m_board)
 	{
-		for (auto el : line)
+		for (auto position : line)
 		{
-			if (el == Piece::None)
+			if (position == Piece::None)
 				return false;
 		}
 	}
-
 	return true;
 }
 

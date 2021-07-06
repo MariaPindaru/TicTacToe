@@ -24,6 +24,9 @@
     <ClCompile Include="BaseEnviroment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SetPiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseEnviroment.h">
