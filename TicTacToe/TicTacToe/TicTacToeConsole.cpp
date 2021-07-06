@@ -42,13 +42,13 @@ void TicTacToeConsole::Run()
 
 	Player firstPlayer(firstName), secondPlayer(secondName);
 
-	bool isXTurns = true;
+	bool isXTurn = true;
 	Player currentPlayer;
 	PrintBoard();
 	while (m_bussinesLogic.IsGameOver() > 0)
 	{
 		
-		currentPlayer = isXTurns == true ? firstPlayer : secondPlayer;
+		currentPlayer = isXTurn == true ? firstPlayer : secondPlayer;
 		std::pair<int, int> pos;
 		while (true)
 		{
@@ -57,7 +57,7 @@ void TicTacToeConsole::Run()
 			try
 			{
 				pos = currentPlayer.SelectPosition(m_bussinesLogic.GetBoardSize());
-				m_bussinesLogic.SetPiece(pos.first, pos.second, isXTurns);
+				m_bussinesLogic.SetPiece(pos.first, pos.second, isXTurn);
 				break;
 			}
 			catch (const char* exception)
@@ -69,7 +69,7 @@ void TicTacToeConsole::Run()
 
 		system("cls");
 		PrintBoard();
-		isXTurns = !isXTurns;
+		isXTurn = !isXTurn;
 	}
 
 	if (m_bussinesLogic.IsGameOver() == -1)
