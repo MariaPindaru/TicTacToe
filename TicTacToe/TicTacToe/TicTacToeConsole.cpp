@@ -94,7 +94,20 @@ void TicTacToeConsole::PrintBoard()
 	{
 		for (int column = 0; column < board.size(); ++column)
 		{
-			std::cout << board[line][column] << "  ";
+			char aux;
+			switch (board[line][column])
+			{
+			case TicTacToeLogic::Piece::X:
+				aux = 'X';
+				break;
+			case TicTacToeLogic::Piece::O:
+				aux = 'O';
+				break;
+			default:
+				aux = '*';
+				break;
+			}
+			std::cout << aux << "  ";
 		}
 		std::cout << std::endl << std::endl;
 	}

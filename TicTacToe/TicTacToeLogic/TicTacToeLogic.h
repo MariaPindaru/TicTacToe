@@ -24,7 +24,7 @@ public:
 
 	void SetPiece(int line, int column, bool placeX);
 
-	std::vector<std::vector<char>> GetBoard() const;
+	std::vector<std::vector<TicTacToeLogic::Piece>> GetBoard() const;
 
 	int IsGameOver();
 

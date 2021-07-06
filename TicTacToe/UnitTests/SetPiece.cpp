@@ -18,7 +18,7 @@ TEST_F(SetPiece, TestSetX)
 
     auto board = std::move(logic.GetBoard());
 
-    ASSERT_TRUE(board[0][0] == 'X');
+    ASSERT_TRUE(board[0][0] == TicTacToeLogic::Piece::X);
 }
 
 TEST_F(SetPiece, TestSetY)
@@ -27,5 +27,5 @@ TEST_F(SetPiece, TestSetY)
 
     auto board = std::move(logic.GetBoard());
 
-    ASSERT_TRUE(board[0][0] == 'O');
+    ASSERT_TRUE(board[0][0] == TicTacToeLogic::Piece::O);
 }

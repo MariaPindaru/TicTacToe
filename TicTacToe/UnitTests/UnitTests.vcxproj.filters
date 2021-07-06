@@ -21,16 +21,11 @@
     <ClCompile Include="WinConfigurations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BaseEnviroment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BaseEnviroment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="BoardTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

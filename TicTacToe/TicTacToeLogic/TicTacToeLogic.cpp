@@ -36,9 +36,9 @@ void TicTacToeLogic::SetPiece(int line, int column, bool placeX)
 	CheckGameState(line, column);
 }
 
-std::vector<std::vector<char>> TicTacToeLogic::GetBoard() const
+std::vector<std::vector<TicTacToeLogic::Piece>> TicTacToeLogic::GetBoard() const
 {
-	std::vector<std::vector<char>> board;
+	/*std::vector<std::vector<char>> board;
 	for (int line = 0; line < m_board.size(); ++line)
 	{
 		std::vector<char> aux;
@@ -53,7 +53,8 @@ std::vector<std::vector<char>> TicTacToeLogic::GetBoard() const
 		}
 		board.push_back(aux);
 	}
-	return board;
+	return board;*/
+	return m_board;
 }
 
 int TicTacToeLogic::IsGameOver()
