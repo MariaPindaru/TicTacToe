@@ -7,8 +7,8 @@ public:
 	Player();
 	Player(std::string);
 	std::pair<int, int> SelectPosition(int dim);
-	std::string GetName();
-	bool operator==(Player);
+	std::string GetName() const;
+	bool operator==(const Player&);
 private:
 	std::string m_name;
 };

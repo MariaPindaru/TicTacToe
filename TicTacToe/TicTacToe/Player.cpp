@@ -28,12 +28,12 @@ std::pair<int, int> Player::SelectPosition(int dim)
 	return pos;
 }
 
-std::string Player::GetName()
+std::string Player::GetName() const
 {
 	return m_name;
 }
 
-bool Player::operator==(Player player)
+bool Player::operator==(const Player& player)
 {
 	if (this->m_name == player.GetName())
 		return true;
