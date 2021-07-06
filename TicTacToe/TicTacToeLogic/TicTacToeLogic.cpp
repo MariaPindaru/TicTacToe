@@ -3,15 +3,15 @@
 
 
 TicTacToeLogic::TicTacToeLogic()
-{
-	m_state = GameState::None;
-	m_winCount = 2;
-}
+	: m_state(GameState::None)
+	, m_winCount(2)
+{}
 
 void TicTacToeLogic::Configure(int dim, int win)
 {
 	if (dim < win || win < 2 || dim < 2)
 		throw "Invalid dimensions!";
+	
 	for (int line = 0; line < dim; ++line)
 	{
 		std::vector<Piece> aux(dim, Piece::None);
@@ -26,6 +26,11 @@ int TicTacToeLogic::GetBoardSize() const
 	return m_board.size();
 }
 
+TicTacToeLogic::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
+{
+	return m_board[line][column];
+}
+
 void TicTacToeLogic::SetPiece(int line, int column, bool placeX)
 {
 	if (m_board[line][column] != Piece::None)
@@ -34,11 +39,6 @@ void TicTacToeLogic::SetPiece(int line, int column, bool placeX)
 	m_board[line][column] = placeX == true ? Piece::X : Piece::O;
 
 	CheckGameState(line, column);
-}
-
-std::vector<std::vector<TicTacToeLogic::Piece>> TicTacToeLogic::GetBoard() const
-{
-	return m_board;
 }
 
 TicTacToeLogic::GameState TicTacToeLogic::GetGameState() const
@@ -63,7 +63,6 @@ bool TicTacToeLogic::GameWon(int lineIndex, int columnIndex)
 		return true;
 
 	return false;
-
 }
 
 bool TicTacToeLogic::CheckColumn(int lineIndex, int columnIndex)
@@ -171,9 +170,9 @@ bool TicTacToeLogic::CheckLeftDiagonal(int lineIndex, int columnIndex)
 
 bool TicTacToeLogic::IsBoardFull()
 {
-	for (auto line : m_board)
+	for (const auto& line : m_board)
 	{
-		for (auto position : line)
+		for (const auto& position : line)
 		{
 			if (position == Piece::None)
 				return false;

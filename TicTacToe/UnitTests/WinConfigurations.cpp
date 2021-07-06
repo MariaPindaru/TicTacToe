@@ -20,7 +20,7 @@ TEST_F(GameOver, TestLineWin)
     logic.SetPiece(0, 1, true);
     logic.SetPiece(0, 2, true);
 
-    ASSERT_TRUE(logic.IsGameOver() == 0);
+    ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestColumnWin)
@@ -29,7 +29,7 @@ TEST_F(GameOver, TestColumnWin)
     logic.SetPiece(1, 0, true);
     logic.SetPiece(2, 0, true);
 
-    ASSERT_TRUE(logic.IsGameOver() == 0);
+    ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestRightDiagonalWin)
@@ -38,7 +38,7 @@ TEST_F(GameOver, TestRightDiagonalWin)
     logic.SetPiece(1, 1, true);
     logic.SetPiece(2, 0, true);
 
-    ASSERT_TRUE(logic.IsGameOver() == 0);
+    ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestLeftDiagonalWin)
@@ -47,7 +47,7 @@ TEST_F(GameOver, TestLeftDiagonalWin)
     logic.SetPiece(1, 1, true);
     logic.SetPiece(2, 2, true);
 
-    ASSERT_TRUE(logic.IsGameOver() == 0);
+    ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestDraw)
@@ -73,5 +73,5 @@ TEST_F(GameOver, TestDraw)
             aux = 0;
     }
 
-    ASSERT_TRUE(logic.IsGameOver() == -1);
+    ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Draw);
 }

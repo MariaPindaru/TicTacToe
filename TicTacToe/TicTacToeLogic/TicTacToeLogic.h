@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+
 class TicTacToeLogic
 {
 public:
@@ -17,14 +18,15 @@ public:
 		Win,
 		Draw
 	};
+
 	TicTacToeLogic();
 
 	void Configure(int dim, int win);
 	int GetBoardSize() const;
 
-	void SetPiece(int line, int column, bool placeX);
+	 Piece GetPieceAt(int line, int column) const;
 
-	std::vector<std::vector<Piece>> GetBoard() const;
+	void SetPiece(int line, int column, bool placeX);
 
 	GameState GetGameState() const;
 

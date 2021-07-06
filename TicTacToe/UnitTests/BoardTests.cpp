@@ -6,10 +6,13 @@ TEST(Board, TestBoardConfig)
     TicTacToeLogic logic;
     logic.Configure(3, 3);
     
-    auto board = std::move(logic.GetBoard());
-    for (auto line : board)
-    {
-        for (auto pos : line)
-            EXPECT_TRUE(pos == TicTacToeLogic::Piece::None);
-    }
+	int dim = logic.GetBoardSize();
+
+	for (int line = 0; line < dim; ++line)
+	{
+		for (int column = 0; column < dim; ++column)
+		{
+			EXPECT_TRUE(logic.GetPieceAt(line, column) == TicTacToeLogic::Piece::None);
+		}
+	}
 }

@@ -2,10 +2,6 @@
 #include <iostream>
 #include "Player.h"
 
-TicTacToeConsole::TicTacToeConsole()
-{
-}
-
 void TicTacToeConsole::ConfigureGame()
 {
 	while (true)
@@ -45,6 +41,7 @@ void TicTacToeConsole::Run()
 	bool isXTurn = true;
 	Player currentPlayer;
 	PrintBoard();
+
 	while (m_bussinesLogic.GetGameState() == TicTacToeLogic::GameState::Playing)
 	{
 		
@@ -88,14 +85,14 @@ void TicTacToeConsole::Run()
 
 void TicTacToeConsole::PrintBoard()
 {
-	auto board = std::move(m_bussinesLogic.GetBoard());
+	int dim = m_bussinesLogic.GetBoardSize();
 
-	for (int line = 0; line < board.size(); ++line)
+	for (int line = 0; line < dim; ++line)
 	{
-		for (int column = 0; column < board.size(); ++column)
+		for (int column = 0; column < dim; ++column)
 		{
 			char aux;
-			switch (board[line][column])
+			switch (m_bussinesLogic.GetPieceAt(line, column))
 			{
 			case TicTacToeLogic::Piece::X:
 				aux = 'X';

@@ -4,7 +4,6 @@
 class TicTacToeConsole
 {
 public:
-	TicTacToeConsole();
 	void ConfigureGame();
 	void Run();
 
