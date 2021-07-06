@@ -45,29 +45,18 @@ void TicTacToeConsole::Run()
 	bool isXTurns = true;
 	Player currentPlayer;
 	PrintBoard();
-	while (!m_bussinesLogic.IsGameOver())
+	while (m_bussinesLogic.IsGameOver() > 0)
 	{
 		
 		currentPlayer = isXTurns == true ? firstPlayer : secondPlayer;
 		std::pair<int, int> pos;
 		while (true)
 		{
+
 			std::cout << currentPlayer.GetName() << ", it's your turn" << std::endl;
 			try
 			{
 				pos = currentPlayer.SelectPosition(m_bussinesLogic.GetBoardSize());
-				break;
-			}
-			catch (const char* exception)
-			{
-				std::cerr << exception << std::endl;
-				std::cerr << "Try again... " << std::endl;
-			}
-		}
-		while (true)
-		{
-			try
-			{
 				m_bussinesLogic.SetPiece(pos.first, pos.second, isXTurns);
 				break;
 			}
@@ -76,16 +65,25 @@ void TicTacToeConsole::Run()
 				std::cerr << exception << std::endl;
 				std::cerr << "Try again... " << std::endl;
 			}
-			PrintBoard();
 		}
 
+		system("cls");
+		PrintBoard();
 		isXTurns = !isXTurns;
 	}
 
-	if (currentPlayer == firstPlayer)
-		std::cout << firstPlayer.GetName() << " won!" << std::endl;
-	else
-		std::cout << secondPlayer.GetName() << " won!" << std::endl;
+	if (m_bussinesLogic.IsGameOver() == -1)
+	{
+		std::cout<<"Draw :)" << std::endl;
+	}
+	else 
+	{
+		if (currentPlayer == firstPlayer)
+			std::cout << firstPlayer.GetName() << " won!" << std::endl;
+		else
+			std::cout << secondPlayer.GetName() << " won!" << std::endl;
+	}
+	
 }
 
 void TicTacToeConsole::PrintBoard()
@@ -98,6 +96,6 @@ void TicTacToeConsole::PrintBoard()
 		{
 			std::cout << board[line][column] << "  ";
 		}
-		std::cout << std::endl;
+		std::cout << std::endl << std::endl;
 	}
 }

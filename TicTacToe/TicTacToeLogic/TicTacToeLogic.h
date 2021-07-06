@@ -14,7 +14,8 @@ public:
 	{
 		None,
 		Playing,
-		Win
+		Win,
+		Draw
 	};
 	TicTacToeLogic();
 
@@ -25,7 +26,7 @@ public:
 
 	std::vector<std::vector<char>> GetBoard() const;
 
-	bool IsGameOver();
+	int IsGameOver();
 
 private:
 	void CheckGameState(int line, int column);
@@ -34,6 +35,7 @@ private:
 	bool CheckLine(int line, int column);
 	bool CheckRightDiagonal(int line, int column);
 	bool CheckLeftDiagonal(int line, int column);
+	bool IsBoardFull();
 
 private:
 	std::vector<std::vector<Piece>> m_board;

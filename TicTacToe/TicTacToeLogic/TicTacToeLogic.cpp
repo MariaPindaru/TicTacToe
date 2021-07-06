@@ -60,17 +60,21 @@ std::vector<std::vector<char>> TicTacToeLogic::GetBoard() const
 	return board;
 }
 
-bool TicTacToeLogic::IsGameOver()
+int TicTacToeLogic::IsGameOver()
 {
 	if (m_state == GameState::Win)
-		return true;
-	return false;
+		return 0;
+	if(m_state == GameState::Draw)
+		return -1;
+	return 1;
 }
 
 void TicTacToeLogic::CheckGameState(int line, int column)
 {
 	if (GameWon(line, column))
 		m_state = GameState::Win;
+	else if (IsBoardFull())
+		m_state = GameState::Draw;
 	else
 		m_state = GameState::Playing;
 }
@@ -175,7 +179,7 @@ bool TicTacToeLogic::CheckLeftDiagonal(int lineIndex, int columnIndex)
 		if (count == m_winCount)
 			return true;
 	}
-	for (int line = lineIndex - 1, column = columnIndex - 1; column >= 0 && line >= 0 ; --line, --column)
+	for (int line = lineIndex - 1, column = columnIndex - 1; column >= 0 && line >= 0; --line, --column)
 	{
 		if (m_board[line][column] == piece)
 			++count;
@@ -186,5 +190,19 @@ bool TicTacToeLogic::CheckLeftDiagonal(int lineIndex, int columnIndex)
 	}
 
 	return false;
+}
+
+bool TicTacToeLogic::IsBoardFull()
+{
+	for (auto line : m_board)
+	{
+		for (auto el : line)
+		{
+			if (el == Piece::None)
+				return false;
+		}
+	}
+
+	return true;
 }
 
