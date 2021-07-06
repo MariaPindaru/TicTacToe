@@ -12,16 +12,16 @@ public:
 
 	enum class GameState
 	{
+		None,
 		Playing,
-		XWon,
-		OWon
+		Win
 	};
 	TicTacToeLogic();
-	TicTacToeLogic(int dim, int win);
-	void Configure(int dim, int win);
 
-	void SetX(int line, int column);
-	void SetO(int line, int column);
+	void Configure(int dim, int win);
+	int GetBoardSize() const;
+
+	void SetPiece(int line, int column, bool placeX);
 
 	std::vector<std::vector<char>> GetBoard() const;
 

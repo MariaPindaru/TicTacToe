@@ -4,28 +4,13 @@
 
 TicTacToeLogic::TicTacToeLogic()
 {
-}
-
-TicTacToeLogic::TicTacToeLogic(int dim, int win)
-{
-	if (dim < win)
-		throw "Invalid dimensions!";
-	for (int line = 0; line < dim; ++line)
-	{
-		std::vector<Piece> aux;
-		for (int column = 0; column < dim; ++column)
-		{
-			aux.push_back(Piece::None);
-		}
-		m_board.push_back(aux);
-	}
-	m_winCount = win;
-	m_state = GameState::Playing;
+	m_state = GameState::None;
+	m_winCount = 2;
 }
 
 void TicTacToeLogic::Configure(int dim, int win)
 {
-	if (dim < win)
+	if (dim < win || win < 2 || dim < 2)
 		throw "Invalid dimensions!";
 	for (int line = 0; line < dim; ++line)
 	{
@@ -40,23 +25,18 @@ void TicTacToeLogic::Configure(int dim, int win)
 	m_state = GameState::Playing;
 }
 
-void TicTacToeLogic::SetX(int line, int column)
+int TicTacToeLogic::GetBoardSize() const
 {
-	if (line < 0 || column < 0 || line >= m_board.size() || column >= m_board.size())
-		throw "Invalid position";
-	if (m_board[line][column] != Piece::None)
-		throw "Position unavailable!";
-	m_board[line][column] = Piece::X;
-	CheckGameState(line, column);
+	return m_board.size();
 }
 
-void TicTacToeLogic::SetO(int line, int column)
+void TicTacToeLogic::SetPiece(int line, int column, bool placeX)
 {
-	if (line < 0 || column < 0 || line >= m_board.size() || column >= m_board.size())
-		throw "Invalid position";
 	if (m_board[line][column] != Piece::None)
 		throw "Position unavailable!";
-	m_board[line][column] = Piece::O;
+
+	m_board[line][column] = placeX == true ? Piece::X : Piece::O;
+
 	CheckGameState(line, column);
 }
 
@@ -82,7 +62,7 @@ std::vector<std::vector<char>> TicTacToeLogic::GetBoard() const
 
 bool TicTacToeLogic::IsGameOver()
 {
-	if (m_state == GameState::OWon || m_state == GameState::XWon)
+	if (m_state == GameState::Win)
 		return true;
 	return false;
 }
@@ -90,15 +70,9 @@ bool TicTacToeLogic::IsGameOver()
 void TicTacToeLogic::CheckGameState(int line, int column)
 {
 	if (GameWon(line, column))
-	{
-		if (m_board[line][column] == Piece::X)
-			m_state = GameState::XWon;
-		else
-			m_state = GameState::OWon;
-		return;
-	}
-		
-	m_state = GameState::Playing;
+		m_state = GameState::Win;
+	else
+		m_state = GameState::Playing;
 }
 
 bool TicTacToeLogic::GameWon(int lineIndex, int columnIndex)
@@ -140,7 +114,7 @@ bool TicTacToeLogic::CheckLine(int lineIndex, int columnIndex)
 {
 	int count = 0;
 	Piece piece = m_board[lineIndex][columnIndex];
-	for (int column = lineIndex; column >= 0; --column)
+	for (int column = columnIndex; column >= 0; --column)
 	{
 		if (m_board[lineIndex][column] == piece)
 			++count;
