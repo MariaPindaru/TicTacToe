@@ -6,10 +6,14 @@ class Player
 public:
 	Player();
 	Player(std::string);
-	std::pair<int, int> SelectPosition(int dim);
+	void SetName(const std::string& name);
 	std::string GetName() const;
-	bool operator==(const Player&);
+	void SetIsMyTurn(bool opt);
+	bool GetIsMyTurn() const;
+	void ChangeTurn();
+
 private:
 	std::string m_name;
+	bool m_isMyTurn;
 };
 

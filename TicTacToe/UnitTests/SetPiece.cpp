@@ -14,7 +14,7 @@ public:
 
 TEST_F(SetPiece, TestSetX)
 {
-    logic.SetPiece(0, 0, true);
+    logic.MakeMoveAt(0, 0, true);
 
     auto board = std::move(logic.GetBoard());
 
@@ -23,7 +23,7 @@ TEST_F(SetPiece, TestSetX)
 
 TEST_F(SetPiece, TestSetY)
 {
-    logic.SetPiece(0, 0, false);
+    logic.MakeMoveAt(0, 0, false);
 
     auto board = std::move(logic.GetBoard());
 

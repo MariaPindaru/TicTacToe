@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "Player.h"
 
 class TicTacToeLogic
 {
@@ -22,11 +23,14 @@ public:
 	TicTacToeLogic();
 
 	void Configure(int dim, int win);
+	void SetFirstPlayer(const std::string& name);
+	void SetSecondPlayer(const std::string& name);
 	int GetBoardSize() const;
+	std::string GetCurrentPlayer() const;
 
 	 Piece GetPieceAt(int line, int column) const;
 
-	void SetPiece(int line, int column, bool placeX);
+	void MakeMoveAt(int line, int column);
 
 	GameState GetGameState() const;
 
@@ -43,4 +47,6 @@ private:
 	std::vector<std::vector<Piece>> m_board;
 	GameState m_state;
 	int m_winCount;
+	Player m_firstPlayer;
+	Player m_secondPlayer;
 };

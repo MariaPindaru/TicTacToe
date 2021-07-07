@@ -16,36 +16,36 @@ public:
 
 TEST_F(GameOver, TestLineWin)
 {
-    logic.SetPiece(0, 0, true);
-    logic.SetPiece(0, 1, true);
-    logic.SetPiece(0, 2, true);
+    logic.MakeMoveAt(0, 0, true);
+    logic.MakeMoveAt(0, 1, true);
+    logic.MakeMoveAt(0, 2, true);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestColumnWin)
 {
-    logic.SetPiece(0, 0, true);
-    logic.SetPiece(1, 0, true);
-    logic.SetPiece(2, 0, true);
+    logic.MakeMoveAt(0, 0, true);
+    logic.MakeMoveAt(1, 0, true);
+    logic.MakeMoveAt(2, 0, true);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestRightDiagonalWin)
 {
-    logic.SetPiece(0, 2, true);
-    logic.SetPiece(1, 1, true);
-    logic.SetPiece(2, 0, true);
+    logic.MakeMoveAt(0, 2, true);
+    logic.MakeMoveAt(1, 1, true);
+    logic.MakeMoveAt(2, 0, true);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestLeftDiagonalWin)
 {
-    logic.SetPiece(0, 0, true);
-    logic.SetPiece(1, 1, true);
-    logic.SetPiece(2, 2, true);
+    logic.MakeMoveAt(0, 0, true);
+    logic.MakeMoveAt(1, 1, true);
+    logic.MakeMoveAt(2, 2, true);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
@@ -61,11 +61,11 @@ TEST_F(GameOver, TestDraw)
         {
             if ((aux + column) % 2 == 0)
             {
-                logic.SetPiece(line, column, true);
+                logic.MakeMoveAt(line, column, true);
             }
             else
             {
-                logic.SetPiece(line, column, false);
+                logic.MakeMoveAt(line, column, false);
             }
         }
 

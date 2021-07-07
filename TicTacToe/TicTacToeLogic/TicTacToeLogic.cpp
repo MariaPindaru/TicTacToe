@@ -21,9 +21,25 @@ void TicTacToeLogic::Configure(int dim, int win)
 	m_state = GameState::Playing;
 }
 
+void TicTacToeLogic::SetFirstPlayer(const std::string& name)
+{
+	m_firstPlayer.SetName(name);
+	m_firstPlayer.SetIsMyTurn(true);
+}
+
+void TicTacToeLogic::SetSecondPlayer(const std::string& name)
+{
+	m_secondPlayer.SetName(name);
+}
+
 int TicTacToeLogic::GetBoardSize() const
 {
 	return m_board.size();
+}
+
+std::string TicTacToeLogic::GetCurrentPlayer() const
+{
+	return m_firstPlayer.GetIsMyTurn() ? m_firstPlayer.GetName() : m_secondPlayer.GetName();
 }
 
 TicTacToeLogic::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
@@ -31,12 +47,12 @@ TicTacToeLogic::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
 	return m_board[line][column];
 }
 
-void TicTacToeLogic::SetPiece(int line, int column, bool placeX)
+void TicTacToeLogic::MakeMoveAt(int line, int column)
 {
 	if (m_board[line][column] != Piece::None)
 		throw "Position unavailable!";
 
-	m_board[line][column] = placeX == true ? Piece::X : Piece::O;
+	m_board[line][column] = m_firstPlayer.GetIsMyTurn() ? Piece::X : Piece::O;
 
 	CheckGameState(line, column);
 }
@@ -53,7 +69,11 @@ void TicTacToeLogic::CheckGameState(int line, int column)
 	else if (IsBoardFull())
 		m_state = GameState::Draw;
 	else
+	{
 		m_state = GameState::Playing;
+		m_firstPlayer.ChangeTurn();
+		m_secondPlayer.ChangeTurn();
+	}
 }
 
 bool TicTacToeLogic::GameWon(int lineIndex, int columnIndex)
