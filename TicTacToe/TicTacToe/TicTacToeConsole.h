@@ -1,16 +1,12 @@
 #pragma once
-#include "TicTacToeLogic.h"
+#include "GameAPI.h"
 
 class TicTacToeConsole
 {
 public:
-	void ConfigureGame();
 	void Run();
 
 private:
-	void PrintBoard();
-
-private:
-	TicTacToeLogic m_bussinesLogic;
+	void PrintBoard(std::shared_ptr<tictactoe::IGame>);
 };
 

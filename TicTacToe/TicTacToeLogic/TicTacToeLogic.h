@@ -1,38 +1,26 @@
 #pragma once
 #include <vector>
 #include "Player.h"
+#include "GameAPI.h"
 
-class TicTacToeLogic
+using namespace tictactoe;
+
+class TicTacToeLogic : public IGame
 {
 public:
-	enum class Piece
-	{
-		None,
-		X,
-		O
-	};
-
-	enum class GameState
-	{
-		None,
-		Playing,
-		Win,
-		Draw
-	};
-
 	TicTacToeLogic();
 
-	void Configure(int, int);
-	void SetFirstPlayer(const std::string&);
-	void SetSecondPlayer(const std::string&);
-	int GetBoardSize() const;
-	std::string GetCurrentPlayer() const;
+	void Configure(int, int) override;
+	void SetFirstPlayer(const std::string&) override;
+	void SetSecondPlayer(const std::string&) override;
+	int GetBoardSize() const override;
+	std::string GetCurrentPlayer() const override;
 
-	 Piece GetPieceAt(int, int) const;
+	 Piece GetPieceAt(int, int) const override;
 
-	void MakeMoveAt(int, int);
+	void MakeMoveAt(int, int) override;
 
-	GameState GetGameState() const;
+	GameState GetGameState() const override;
 
 private:
 	void CheckGameState(int, int);

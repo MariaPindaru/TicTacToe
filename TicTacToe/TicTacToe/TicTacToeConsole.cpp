@@ -2,8 +2,10 @@
 #include <iostream>
 #include "Player.h"
 
-void TicTacToeConsole::ConfigureGame()
+void TicTacToeConsole::Run()
 {
+	auto bussinesLogic = tictactoe::IGame::Produce();
+
 	while (true)
 	{
 		int dim, winCount;
@@ -13,7 +15,7 @@ void TicTacToeConsole::ConfigureGame()
 		std::cin >> winCount;
 		try
 		{
-			this->m_bussinesLogic.Configure(dim, winCount);
+			bussinesLogic->Configure(dim, winCount);
 			break;
 		}
 		catch (const char* exception)
@@ -22,10 +24,7 @@ void TicTacToeConsole::ConfigureGame()
 			std::cerr << "Try again... " << std::endl;
 		}
 	}
-}
 
-void TicTacToeConsole::Run()
-{
 	std::string firstName, secondName;
 	std::cout << "First player: ";
 	std::cin >> firstName;
@@ -36,23 +35,25 @@ void TicTacToeConsole::Run()
 		std::cin >> secondName;
 	} while (firstName == secondName);
 
-	m_bussinesLogic.SetFirstPlayer(firstName);
-	m_bussinesLogic.SetSecondPlayer(secondName);
+	
 
-	PrintBoard();
+	bussinesLogic->SetFirstPlayer(firstName);
+	bussinesLogic->SetSecondPlayer(secondName);
 
-	while (m_bussinesLogic.GetGameState() == TicTacToeLogic::GameState::Playing)
+	PrintBoard(bussinesLogic);
+
+	while (bussinesLogic->GetGameState() == tictactoe::GameState::Playing)
 	{
 		std::pair<int, int> pos;
 		while (true)
 		{
 
-			std::cout << m_bussinesLogic.GetCurrentPlayer() << ", it's your turn" << std::endl;
+			std::cout << bussinesLogic->GetCurrentPlayer() << ", it's your turn" << std::endl;
 			std::cout << "Select position: ";
 			std::cin >> pos.first >> pos.second;
 			try
 			{
-				m_bussinesLogic.MakeMoveAt(pos.first, pos.second);
+				bussinesLogic->MakeMoveAt(pos.first, pos.second);
 				break;
 			}
 			catch (const char* exception)
@@ -63,30 +64,30 @@ void TicTacToeConsole::Run()
 		}
 
 		system("cls");
-		PrintBoard();
+		PrintBoard(bussinesLogic);
 	}
 
-	if (m_bussinesLogic.GetGameState() == TicTacToeLogic::GameState::Draw)
+	if (bussinesLogic->GetGameState() == tictactoe::GameState::Draw)
 		std::cout<<"Draw :)" << std::endl;
 	else 
-		std::cout << m_bussinesLogic.GetCurrentPlayer() << " won!" << std::endl;
+		std::cout << bussinesLogic->GetCurrentPlayer() << " won!" << std::endl;
 }
 
-void TicTacToeConsole::PrintBoard()
+void TicTacToeConsole::PrintBoard(std::shared_ptr<tictactoe::IGame> bussinesLogic)
 {
-	int dim = m_bussinesLogic.GetBoardSize();
+	int dim = bussinesLogic->GetBoardSize();
 
 	for (int line = 0; line < dim; ++line)
 	{
 		for (int column = 0; column < dim; ++column)
 		{
 			char aux;
-			switch (m_bussinesLogic.GetPieceAt(line, column))
+			switch (bussinesLogic->GetPieceAt(line, column))
 			{
-			case TicTacToeLogic::Piece::X:
+			case tictactoe::Piece::X:
 				aux = 'X';
 				break;
-			case TicTacToeLogic::Piece::O:
+			case tictactoe::Piece::O:
 				aux = 'O';
 				break;
 			default:

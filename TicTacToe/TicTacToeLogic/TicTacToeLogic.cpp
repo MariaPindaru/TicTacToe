@@ -42,7 +42,7 @@ std::string TicTacToeLogic::GetCurrentPlayer() const
 	return m_firstPlayer.GetIsMyTurn() ? m_firstPlayer.GetName() : m_secondPlayer.GetName();
 }
 
-TicTacToeLogic::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
+tictactoe::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
 {
 	return m_board[line][column];
 }
@@ -60,7 +60,7 @@ void TicTacToeLogic::MakeMoveAt(int line, int column)
 	CheckGameState(line, column);
 }
 
-TicTacToeLogic::GameState TicTacToeLogic::GetGameState() const
+tictactoe::GameState TicTacToeLogic::GetGameState() const
 {
 	return m_state;
 }
@@ -202,5 +202,10 @@ bool TicTacToeLogic::IsBoardFull()
 		}
 	}
 	return true;
+}
+
+tictactoe::IGame::Ptr IGame::Produce()
+{
+	return std::make_shared<TicTacToeLogic>();
 }
 
