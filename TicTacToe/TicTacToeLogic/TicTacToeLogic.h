@@ -1,7 +1,10 @@
 #pragma once
+
 #include <vector>
+#include <memory>
+
 #include "Player.h"
-#include ".\GameAPI.h"
+#include "API/GameAPI.h"
 
 using namespace tictactoe;
 
@@ -19,12 +22,14 @@ public:
 
 	int GetBoardSize() const override;
 	std::string GetCurrentPlayer() const override;
-
 	 Piece GetPieceAt(int, int) const override;
+
+	 void SetStrategy(EStrategy strategyType) override;
+	 //void SetStrategy(std::shared_ptr<IStrategy> newStrategy) override;
 
 	 EMoveResult MakeMoveAt(int, int) override;
 
-	GameState GetGameState() const override;
+	 GameState GetGameState() const override;
 
 private:
 	void CheckGameState(int, int);
@@ -42,4 +47,6 @@ private:
 
 	Player m_firstPlayer;
 	Player m_secondPlayer;
+
+	std::shared_ptr<IStrategy> m_strategy;
 };

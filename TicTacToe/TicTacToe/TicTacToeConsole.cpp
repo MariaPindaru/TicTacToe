@@ -34,8 +34,6 @@ void TicTacToeConsole::Run()
 		std::cin >> secondName;
 	} while (firstName == secondName);
 
-	
-
 	bussinesLogic->SetFirstPlayer(firstName);
 	bussinesLogic->SetSecondPlayer(secondName);
 

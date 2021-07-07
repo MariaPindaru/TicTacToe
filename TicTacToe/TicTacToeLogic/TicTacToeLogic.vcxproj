@@ -172,10 +172,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="API\GameAPI.h" />
+    <ClInclude Include="EasyStrategy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TicTacToeLogic.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EasyStrategy.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TicTacToeLogic.cpp" />
   </ItemGroup>

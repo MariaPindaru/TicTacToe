@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <memory>
+#include <vector>
 
 namespace tictactoe
 {
@@ -27,6 +29,20 @@ namespace tictactoe
 		InvalidCoordinates
 	};
 
+	enum class EStrategy
+	{
+		EASY,
+		MEDIUM
+	};
+
+	class IStrategy
+	{
+	public:
+		virtual ~IStrategy() = default;
+
+		virtual std::pair<int, int> GetMove(const std::vector<std::vector<Piece>>&) = 0;
+	};
+
 	class IGame
 	{
 	public:
@@ -43,6 +59,9 @@ namespace tictactoe
 		virtual std::string GetCurrentPlayer() const = 0;
 		virtual Piece GetPieceAt(int, int) const = 0;
 		virtual GameState GetGameState() const = 0;
+
+		virtual void SetStrategy(EStrategy strategyType) = 0;
+		//virtual void SetStrategy(std::shared_ptr<IStrategy> newStrategy) = 0;
 
 		virtual EMoveResult MakeMoveAt(int, int) = 0;
 
