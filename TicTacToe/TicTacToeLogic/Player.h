@@ -6,9 +6,9 @@ class Player
 public:
 	Player();
 	Player(std::string);
-	void SetName(const std::string& name);
+	void SetName(const std::string&);
 	std::string GetName() const;
-	void SetIsMyTurn(bool opt);
+	void SetIsMyTurn(bool);
 	bool GetIsMyTurn() const;
 	void ChangeTurn();
 

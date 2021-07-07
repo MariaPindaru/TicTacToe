@@ -1,13 +1,13 @@
 #include "gtest/gtest.h"
 #include "TicTacToeLogic.h"
 
-extern ::testing::Environment* env;
-
 class GameOver : public ::testing::Test
 {
     void SetUp() override
     {
         logic.Configure(3, 3);
+        logic.SetFirstPlayer("first");
+        logic.SetSecondPlayer("second");
     }
 
 public:
@@ -16,62 +16,64 @@ public:
 
 TEST_F(GameOver, TestLineWin)
 {
-    logic.MakeMoveAt(0, 0, true);
-    logic.MakeMoveAt(0, 1, true);
-    logic.MakeMoveAt(0, 2, true);
+    logic.MakeMoveAt(0, 0);
+    logic.MakeMoveAt(1, 0);
+
+    logic.MakeMoveAt(0, 1);
+    logic.MakeMoveAt(1, 1);
+
+    logic.MakeMoveAt(0, 2);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestColumnWin)
 {
-    logic.MakeMoveAt(0, 0, true);
-    logic.MakeMoveAt(1, 0, true);
-    logic.MakeMoveAt(2, 0, true);
+    logic.MakeMoveAt(0, 0);
+    logic.MakeMoveAt(0, 1);
+
+    logic.MakeMoveAt(1, 0);
+    logic.MakeMoveAt(1, 1);
+
+    logic.MakeMoveAt(2, 0);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestRightDiagonalWin)
 {
-    logic.MakeMoveAt(0, 2, true);
-    logic.MakeMoveAt(1, 1, true);
-    logic.MakeMoveAt(2, 0, true);
+    logic.MakeMoveAt(0, 2);
+    logic.MakeMoveAt(0, 1);
+
+    logic.MakeMoveAt(1, 1);
+    logic.MakeMoveAt(2, 1);
+
+    logic.MakeMoveAt(2, 0);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestLeftDiagonalWin)
 {
-    logic.MakeMoveAt(0, 0, true);
-    logic.MakeMoveAt(1, 1, true);
-    logic.MakeMoveAt(2, 2, true);
+    logic.MakeMoveAt(0, 0);
+    logic.MakeMoveAt(1, 0);
+
+    logic.MakeMoveAt(1, 1);
+    logic.MakeMoveAt(0, 1);
+
+    logic.MakeMoveAt(2, 2);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Win);
 }
 
 TEST_F(GameOver, TestDraw)
 {
-    TicTacToeLogic logic;
-    logic.Configure(3, 3);
-    int aux = 1;
-    for (int line = 0; line < 3; ++line)
-    {
-        for (int column = 0; column < 3; ++column)
-        {
-            if ((aux + column) % 2 == 0)
-            {
-                logic.MakeMoveAt(line, column, true);
-            }
-            else
-            {
-                logic.MakeMoveAt(line, column, false);
-            }
-        }
+    for (int line = 0; line < 3; line += 2)
+        for (int column = 0; column < 3; ++column) 
+                logic.MakeMoveAt(line, column);
 
-        if (line % 2 == 1)
-            aux = 0;
-    }
+    for (int column = 0; column < 3; ++column)
+        logic.MakeMoveAt(1, column);
 
     ASSERT_TRUE(logic.GetGameState() == TicTacToeLogic::GameState::Draw);
 }

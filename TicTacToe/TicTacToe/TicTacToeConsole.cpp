@@ -67,14 +67,9 @@ void TicTacToeConsole::Run()
 	}
 
 	if (m_bussinesLogic.GetGameState() == TicTacToeLogic::GameState::Draw)
-	{
 		std::cout<<"Draw :)" << std::endl;
-	}
 	else 
-	{
 		std::cout << m_bussinesLogic.GetCurrentPlayer() << " won!" << std::endl;
-	}
-	
 }
 
 void TicTacToeConsole::PrintBoard()

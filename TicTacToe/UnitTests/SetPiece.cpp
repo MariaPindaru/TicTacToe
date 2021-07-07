@@ -6,6 +6,8 @@ class SetPiece : public ::testing::Test
     void SetUp() override
     {
         logic.Configure(2, 2);
+		logic.SetFirstPlayer("first");
+		logic.SetSecondPlayer("second");
     }
 
 public:
@@ -14,18 +16,15 @@ public:
 
 TEST_F(SetPiece, TestSetX)
 {
-    logic.MakeMoveAt(0, 0, true);
+    logic.MakeMoveAt(0, 0);
 
-    auto board = std::move(logic.GetBoard());
-
-    ASSERT_TRUE(board[0][0] == TicTacToeLogic::Piece::X);
+    ASSERT_TRUE(logic.GetPieceAt(0,0) == TicTacToeLogic::Piece::X);
 }
 
-TEST_F(SetPiece, TestSetY)
+TEST_F(SetPiece, TestSetO)
 {
-    logic.MakeMoveAt(0, 0, false);
+    logic.MakeMoveAt(1, 0);
+    logic.MakeMoveAt(0, 0);
 
-    auto board = std::move(logic.GetBoard());
-
-    ASSERT_TRUE(board[0][0] == TicTacToeLogic::Piece::O);
+    ASSERT_TRUE(logic.GetPieceAt(0, 0) == TicTacToeLogic::Piece::O);
 }

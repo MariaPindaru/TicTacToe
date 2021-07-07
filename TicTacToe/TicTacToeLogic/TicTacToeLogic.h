@@ -22,25 +22,25 @@ public:
 
 	TicTacToeLogic();
 
-	void Configure(int dim, int win);
-	void SetFirstPlayer(const std::string& name);
-	void SetSecondPlayer(const std::string& name);
+	void Configure(int, int);
+	void SetFirstPlayer(const std::string&);
+	void SetSecondPlayer(const std::string&);
 	int GetBoardSize() const;
 	std::string GetCurrentPlayer() const;
 
-	 Piece GetPieceAt(int line, int column) const;
+	 Piece GetPieceAt(int, int) const;
 
-	void MakeMoveAt(int line, int column);
+	void MakeMoveAt(int, int);
 
 	GameState GetGameState() const;
 
 private:
-	void CheckGameState(int line, int column);
-	bool GameWon(int line, int column);
-	bool CheckColumn(int line, int column);
-	bool CheckLine(int line, int column);
-	bool CheckRightDiagonal(int line, int column);
-	bool CheckLeftDiagonal(int line, int column);
+	void CheckGameState(int, int);
+	bool GameWon(int, int);
+	bool CheckColumn(int, int);
+	bool CheckLine(int, int);
+	bool CheckRightDiagonal(int, int);
+	bool CheckLeftDiagonal(int, int);
 	bool IsBoardFull();
 
 private:

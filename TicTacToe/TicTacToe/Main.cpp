@@ -1,5 +1,6 @@
 #include <iostream>
 #include "TicTacToeConsole.h"
+#include "TicTacToeLogic.h"
 
 int main()
 {

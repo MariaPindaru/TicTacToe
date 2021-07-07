@@ -49,6 +49,9 @@ TicTacToeLogic::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
 
 void TicTacToeLogic::MakeMoveAt(int line, int column)
 {
+	if(line < 0 || column < 0 || line >= m_board.size() || column >= m_board.size())
+		throw "Invalid position!";
+
 	if (m_board[line][column] != Piece::None)
 		throw "Position unavailable!";
 
