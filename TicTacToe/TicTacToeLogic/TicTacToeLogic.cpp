@@ -1,6 +1,7 @@
 
 #include "TicTacToeLogic.h"
 #include "EasyStrategy.h"
+#include "MediumStrategy.h"
 
 
 TicTacToeLogic::TicTacToeLogic()
@@ -66,10 +67,10 @@ void TicTacToeLogic::SetStrategy(EStrategy strategyType)
 		m_strategy = std::make_shared<EasyStrategy>();
 		break;
 	case EStrategy::MEDIUM:
+		m_strategy = std::make_shared<MediumStrategy>();
 		break;
 	default:
 		break;
-
 	}
 }
 
@@ -84,9 +85,6 @@ tictactoe::EMoveResult TicTacToeLogic::MakeMoveAt(int line, int column)
 	m_board[line][column] = m_firstPlayer.GetIsMyTurn() ? Piece::X : Piece::O;
 
 	CheckGameState(line, column);
-
-	//if (m_state != GameState::OWon || m_state != GameState::XWon)
-	//	m_strategy->MakeMove(*this);
 
 	return tictactoe::EMoveResult::Success;
 }

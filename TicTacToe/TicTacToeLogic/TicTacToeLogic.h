@@ -24,7 +24,7 @@ public:
 	std::string GetCurrentPlayer() const override;
 	 Piece GetPieceAt(int, int) const override;
 
-	 void SetStrategy(EStrategy strategyType) override;
+	 void SetStrategy(EStrategy) override;
 	 //void SetStrategy(std::shared_ptr<IStrategy> newStrategy) override;
 
 	 EMoveResult MakeMoveAt(int, int) override;
