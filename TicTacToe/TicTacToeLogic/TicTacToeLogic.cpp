@@ -7,11 +7,11 @@ TicTacToeLogic::TicTacToeLogic()
 	, m_winCount(2)
 {}
 
-void TicTacToeLogic::Configure(int dim, int win)
+void TicTacToeLogic::Init(int dim, int win)
 {
 	if (dim < win || win < 2 || dim < 2)
 		throw "Invalid dimensions!";
-	
+
 	for (int line = 0; line < dim; ++line)
 	{
 		std::vector<Piece> aux(dim, Piece::None);
@@ -32,6 +32,16 @@ void TicTacToeLogic::SetSecondPlayer(const std::string& name)
 	m_secondPlayer.SetName(name);
 }
 
+std::string TicTacToeLogic::GetFirstPlayer() const
+{
+	return m_firstPlayer.GetName();
+}
+
+std::string TicTacToeLogic::GetSecondPlayer() const
+{
+	return m_secondPlayer.GetName();
+}
+
 int TicTacToeLogic::GetBoardSize() const
 {
 	return m_board.size();
@@ -47,17 +57,19 @@ tictactoe::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
 	return m_board[line][column];
 }
 
-void TicTacToeLogic::MakeMoveAt(int line, int column)
+tictactoe::EMoveResult TicTacToeLogic::MakeMoveAt(int line, int column)
 {
-	if(line < 0 || column < 0 || line >= m_board.size() || column >= m_board.size())
-		throw "Invalid position!";
+	if (line < 0 || column < 0 || line >= m_board.size() || column >= m_board.size())
+		return tictactoe::EMoveResult::InvalidCoordinates;
 
 	if (m_board[line][column] != Piece::None)
-		throw "Position unavailable!";
+		return tictactoe::EMoveResult::PositionOccupied;
 
 	m_board[line][column] = m_firstPlayer.GetIsMyTurn() ? Piece::X : Piece::O;
 
 	CheckGameState(line, column);
+
+	return tictactoe::EMoveResult::Success;
 }
 
 tictactoe::GameState TicTacToeLogic::GetGameState() const
@@ -68,7 +80,7 @@ tictactoe::GameState TicTacToeLogic::GetGameState() const
 void TicTacToeLogic::CheckGameState(int line, int column)
 {
 	if (GameWon(line, column))
-		m_state = GameState::Win;
+		m_state = m_firstPlayer.GetIsMyTurn() ? GameState::XWon : GameState::OWon;
 	else if (IsBoardFull())
 		m_state = GameState::Draw;
 	else

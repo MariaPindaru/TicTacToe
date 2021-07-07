@@ -4,6 +4,7 @@
 int main()
 {
 	TicTacToeConsole game;
+
 	game.Run();
 
 	return 0;

@@ -4,7 +4,7 @@
 TEST(Board, TestBoardConfig)
 {
     TicTacToeLogic logic;
-    logic.Configure(3, 3);
+    logic.Init(3, 3);
     
 	int dim = logic.GetBoardSize();
 

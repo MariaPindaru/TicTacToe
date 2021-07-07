@@ -1,10 +1,9 @@
 #include "TicTacToeConsole.h"
 #include <iostream>
-#include "Player.h"
 
 void TicTacToeConsole::Run()
 {
-	auto bussinesLogic = tictactoe::IGame::Produce();
+	tictactoe::IGame::Ptr bussinesLogic = tictactoe::IGame::Produce();
 
 	while (true)
 	{
@@ -15,7 +14,7 @@ void TicTacToeConsole::Run()
 		std::cin >> winCount;
 		try
 		{
-			bussinesLogic->Configure(dim, winCount);
+			bussinesLogic->Init(dim , winCount);
 			break;
 		}
 		catch (const char* exception)
@@ -45,35 +44,34 @@ void TicTacToeConsole::Run()
 	while (bussinesLogic->GetGameState() == tictactoe::GameState::Playing)
 	{
 		std::pair<int, int> pos;
-		while (true)
+		do 
 		{
-
 			std::cout << bussinesLogic->GetCurrentPlayer() << ", it's your turn" << std::endl;
 			std::cout << "Select position: ";
 			std::cin >> pos.first >> pos.second;
-			try
-			{
-				bussinesLogic->MakeMoveAt(pos.first, pos.second);
-				break;
-			}
-			catch (const char* exception)
-			{
-				std::cerr << exception << std::endl;
-				std::cerr << "Try again... " << std::endl;
-			}
-		}
+		} while (bussinesLogic->MakeMoveAt(pos.first, pos.second) != tictactoe::EMoveResult::Success);
 
 		system("cls");
 		PrintBoard(bussinesLogic);
 	}
 
-	if (bussinesLogic->GetGameState() == tictactoe::GameState::Draw)
-		std::cout<<"Draw :)" << std::endl;
-	else 
-		std::cout << bussinesLogic->GetCurrentPlayer() << " won!" << std::endl;
+	switch (bussinesLogic->GetGameState())
+	{
+	default:
+		break;
+	case tictactoe::GameState::XWon:
+		std::cout << bussinesLogic->GetFirstPlayer() << " won!" << std::endl;
+		break;
+	case tictactoe::GameState::OWon:
+		std::cout << bussinesLogic->GetSecondPlayer() << " won!" << std::endl;
+		break;
+	case tictactoe::GameState::Draw:
+		std::cout << "Draw! :)" << std::endl;
+		break;
+	}
 }
 
-void TicTacToeConsole::PrintBoard(std::shared_ptr<tictactoe::IGame> bussinesLogic)
+void TicTacToeConsole::PrintBoard(tictactoe::IGame::Ptr bussinesLogic)
 {
 	int dim = bussinesLogic->GetBoardSize();
 

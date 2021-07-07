@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "Player.h"
-#include "GameAPI.h"
+#include ".\GameAPI.h"
 
 using namespace tictactoe;
 
@@ -10,15 +10,19 @@ class TicTacToeLogic : public IGame
 public:
 	TicTacToeLogic();
 
-	void Configure(int, int) override;
+	void Init(int, int) override;
+
 	void SetFirstPlayer(const std::string&) override;
 	void SetSecondPlayer(const std::string&) override;
+	std::string GetFirstPlayer() const override;
+	std::string GetSecondPlayer() const override;
+
 	int GetBoardSize() const override;
 	std::string GetCurrentPlayer() const override;
 
 	 Piece GetPieceAt(int, int) const override;
 
-	void MakeMoveAt(int, int) override;
+	 EMoveResult MakeMoveAt(int, int) override;
 
 	GameState GetGameState() const override;
 
@@ -35,6 +39,7 @@ private:
 	std::vector<std::vector<Piece>> m_board;
 	GameState m_state;
 	int m_winCount;
+
 	Player m_firstPlayer;
 	Player m_secondPlayer;
 };
