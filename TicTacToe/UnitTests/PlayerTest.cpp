@@ -6,7 +6,7 @@ class PlayerTest : public ::testing::Test
 	void SetUp() override
 	{
 		logic = tictactoe::IGame::Produce();
-		logic->Init(3, 3);
+		logic->Init(3, 3, EGameType::TwoPlayers);
 		logic->SetFirstPlayer("first");
 		logic->SetSecondPlayer("second");
 	}

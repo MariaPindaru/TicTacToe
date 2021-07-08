@@ -25,12 +25,11 @@ void TicTacToeLogic::Init(int dim, int win, EGameType type, bool computerFirst)
 	}
 	m_winCount = win;
 	m_state = EGameState::Playing;
-	m_type = type;
 
-	if (computerFirst == true && m_type == EGameType::SinglePlayer)
-	{
-		MakeMove();
-	}
+	m_type = type;
+	if(m_type == EGameType::SinglePlayer)
+		if (computerFirst == true && m_type == EGameType::SinglePlayer)
+			MakeMove();
 }
 
 void TicTacToeLogic::SetFirstPlayer(const std::string& name)

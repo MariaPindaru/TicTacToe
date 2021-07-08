@@ -53,8 +53,8 @@ namespace tictactoe
 	{
 	public:
 		using Ptr = std::shared_ptr<IGame>;
-		 
-		virtual void Init(int, int, EGameType, bool) = 0;
+
+		virtual void Init(int, int, EGameType, bool computerFirst = false) = 0;
 
 		virtual void SetFirstPlayer(const std::string&) = 0;
 		virtual void SetSecondPlayer(const std::string&) = 0;

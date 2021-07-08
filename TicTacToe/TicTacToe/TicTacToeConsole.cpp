@@ -34,10 +34,11 @@ void TicTacToeConsole::Run()
 		}
 	}
 
-	int difficulty = 0;
-	std::cout << "Select difficulty: " << std::endl << "1 -> easy" << std::endl << "2 -> medium" << std::endl;
-	std::cin >> difficulty;
-
+	int difficulty;
+	do {
+		std::cout << "Select difficulty: " << std::endl << "1 -> easy" << std::endl << "2 -> medium" << std::endl;
+		std::cin >> difficulty;
+	} while (difficulty != 1 && difficulty != 2);
 	bussinessLogic->SetStrategy(static_cast<tictactoe::EStrategy>(difficulty - 1));
 
 	std::string firstName, secondName;
@@ -86,16 +87,16 @@ void TicTacToeConsole::Run()
 	}
 }
 
-void TicTacToeConsole::PrintBoard(tictactoe::IGame::Ptr bussinesLogic)
+void TicTacToeConsole::PrintBoard(tictactoe::IGame::Ptr bussinessLogic)
 {
-	int dim = bussinesLogic->GetBoardSize();
+	int dim = bussinessLogic->GetBoardSize();
 
 	for (int line = 0; line < dim; ++line)
 	{
 		for (int column = 0; column < dim; ++column)
 		{
 			char aux;
-			switch (bussinesLogic->GetPieceAt(line, column))
+			switch (bussinessLogic->GetPieceAt(line, column))
 			{
 			case tictactoe::EPiece::X:
 				aux = 'X';

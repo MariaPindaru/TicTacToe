@@ -13,7 +13,7 @@ class TicTacToeLogic : public IGame
 public:
 	TicTacToeLogic();
 
-	void Init(int, int, EGameType, bool computerFirst) override;
+	void Init(int, int, EGameType, bool computerFirst = false) override;
 
 	void SetFirstPlayer(const std::string&) override;
 	void SetSecondPlayer(const std::string&) override;

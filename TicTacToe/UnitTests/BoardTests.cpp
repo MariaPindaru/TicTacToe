@@ -4,7 +4,7 @@
 TEST(BoardTest, TestBoardConfig)
 {
 	tictactoe::IGame::Ptr logic = tictactoe::IGame::Produce();
-	logic->Init(3, 3);
+	logic->Init(3, 3, EGameType::TwoPlayers);
 	logic->SetFirstPlayer("first");
 	logic->SetSecondPlayer("second");
     

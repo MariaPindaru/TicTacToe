@@ -1,7 +1,11 @@
 #include "gtest/gtest.h"
 #include "TicTacToeLogic.h"
 
-int main()
+int main(int argc, char** argv)
 {
-	return RUN_ALL_TESTS();
+	::testing::InitGoogleTest(&argc, argv);
+
+	int res = RUN_ALL_TESTS();
+
+	return res;
 }
