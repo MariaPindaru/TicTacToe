@@ -54,7 +54,7 @@ namespace tictactoe
 	public:
 		using Ptr = std::shared_ptr<IGame>;
 		 
-		virtual void Init(int, int, EGameType) = 0;
+		virtual void Init(int, int, EGameType, bool) = 0;
 
 		virtual void SetFirstPlayer(const std::string&) = 0;
 		virtual void SetSecondPlayer(const std::string&) = 0;
@@ -67,7 +67,7 @@ namespace tictactoe
 		virtual EGameState GetGameState() const = 0;
 
 		virtual void SetStrategy(EStrategy strategyType) = 0;
-		//virtual void SetStrategy(std::shared_ptr<IStrategy> newStrategy) = 0;
+		virtual void SetStrategy(std::shared_ptr<IStrategy> newStrategy) = 0;
 
 		virtual EMoveResult MakeMoveAt(int, int) = 0;
 		virtual EMoveResult MakeMove() = 0;

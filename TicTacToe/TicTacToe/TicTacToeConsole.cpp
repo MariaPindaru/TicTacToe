@@ -8,17 +8,23 @@ void TicTacToeConsole::Run()
 	while (true)
 	{
 		int dim, winCount;
-		std::string option;
+		std::string gameMode, whoIsFirst;
 		std::cout << "Board dimension: ";
 		std::cin >> dim;
 		std::cout << "Win count: ";
 		std::cin >> winCount;
 		std::cout << "VS computer? (y/n) ";
-		std::cin >> option;
+		std::cin >> gameMode;
+
+		if (gameMode == "y")
+		{
+			std::cout << "Do you want to be X? (y/n) ";
+			std::cin >> whoIsFirst;
+		}
 
 		try
 		{
-			bussinessLogic->Init(dim , winCount, option == "y" ? tictactoe::EGameType::SinglePlayer : tictactoe::EGameType::TwoPlayers);
+			bussinessLogic->Init(dim , winCount, gameMode == "y" ? tictactoe::EGameType::SinglePlayer : tictactoe::EGameType::TwoPlayers, whoIsFirst == "y" ? false : true);
 			break;
 		}
 		catch (const char* exception)
@@ -28,8 +34,11 @@ void TicTacToeConsole::Run()
 		}
 	}
 
-	// ...
-	bussinessLogic->SetStrategy(tictactoe::EStrategy::Medium);
+	int difficulty = 0;
+	std::cout << "Select difficulty: " << std::endl << "1 -> easy" << std::endl << "2 -> medium" << std::endl;
+	std::cin >> difficulty;
+
+	bussinessLogic->SetStrategy(static_cast<tictactoe::EStrategy>(difficulty - 1));
 
 	std::string firstName, secondName;
 	std::cout << "First player: ";

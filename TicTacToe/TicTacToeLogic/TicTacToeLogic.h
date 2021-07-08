@@ -13,7 +13,7 @@ class TicTacToeLogic : public IGame
 public:
 	TicTacToeLogic();
 
-	void Init(int, int, EGameType) override;
+	void Init(int, int, EGameType, bool computerFirst) override;
 
 	void SetFirstPlayer(const std::string&) override;
 	void SetSecondPlayer(const std::string&) override;
@@ -25,7 +25,7 @@ public:
 	 EPiece GetPieceAt(int, int) const override;
 
 	 void SetStrategy(EStrategy) override;
-	 //void SetStrategy(std::shared_ptr<IStrategy> newStrategy) override;
+	 void SetStrategy(std::shared_ptr<IStrategy> newStrategy) override;
 
 	 EMoveResult MakeMoveAt(int, int) override;
 

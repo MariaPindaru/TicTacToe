@@ -9,9 +9,11 @@ TicTacToeLogic::TicTacToeLogic()
 	, m_winCount(2)
 	, m_strategy(std::make_shared<EasyStrategy>())
 	, m_type(EGameType::SinglePlayer)
-{}
+{
+	m_firstPlayer.SetIsMyTurn(true);
+}
 
-void TicTacToeLogic::Init(int dim, int win, EGameType type)
+void TicTacToeLogic::Init(int dim, int win, EGameType type, bool computerFirst)
 {
 	if (dim < win || win < 2 || dim < 2)
 		throw "Invalid dimensions!";
@@ -24,12 +26,16 @@ void TicTacToeLogic::Init(int dim, int win, EGameType type)
 	m_winCount = win;
 	m_state = EGameState::Playing;
 	m_type = type;
+
+	if (computerFirst == true && m_type == EGameType::SinglePlayer)
+	{
+		MakeMove();
+	}
 }
 
 void TicTacToeLogic::SetFirstPlayer(const std::string& name)
 {
 	m_firstPlayer.SetName(name);
-	m_firstPlayer.SetIsMyTurn(true);
 }
 
 void TicTacToeLogic::SetSecondPlayer(const std::string& name)
@@ -75,6 +81,11 @@ void TicTacToeLogic::SetStrategy(EStrategy strategyType)
 	default:
 		break;
 	}
+}
+
+void TicTacToeLogic::SetStrategy(std::shared_ptr<IStrategy> newStrategy)
+{
+	m_strategy = newStrategy;
 }
 
 tictactoe::EMoveResult TicTacToeLogic::MakeMoveAt(int line, int column)

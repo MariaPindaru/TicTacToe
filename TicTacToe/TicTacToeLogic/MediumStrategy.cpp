@@ -1,4 +1,5 @@
 #include "MediumStrategy.h"
+
 #include <ctime>
 
 std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictactoe::EPiece>>& board, int winCount)
