@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="SetPiece.cpp" />
     <ClCompile Include="WinConfigurations.cpp" />
   </ItemGroup>

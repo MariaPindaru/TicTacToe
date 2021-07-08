@@ -6,14 +6,14 @@
 
 namespace tictactoe
 {
-	enum class Piece
+	enum class EPiece
 	{
 		None,
 		X,
 		O
 	};
 
-	enum class GameState
+	enum class EGameState
 	{
 		None,
 		Playing,
@@ -31,8 +31,8 @@ namespace tictactoe
 
 	enum class EStrategy
 	{
-		EASY,
-		MEDIUM
+		Easy,
+		Medium
 	};
 
 	class IStrategy
@@ -40,7 +40,7 @@ namespace tictactoe
 	public:
 		virtual ~IStrategy() = default;
 
-		virtual std::pair<int, int> GetMove(const std::vector<std::vector<Piece>>&) = 0;
+		virtual std::pair<int, int> GetMove(const std::vector<std::vector<EPiece>>&) = 0;
 	};
 
 	class IGame
@@ -57,8 +57,8 @@ namespace tictactoe
 
 		virtual int GetBoardSize() const = 0;
 		virtual std::string GetCurrentPlayer() const = 0;
-		virtual Piece GetPieceAt(int, int) const = 0;
-		virtual GameState GetGameState() const = 0;
+		virtual EPiece GetPieceAt(int, int) const = 0;
+		virtual EGameState GetGameState() const = 0;
 
 		virtual void SetStrategy(EStrategy strategyType) = 0;
 		//virtual void SetStrategy(std::shared_ptr<IStrategy> newStrategy) = 0;

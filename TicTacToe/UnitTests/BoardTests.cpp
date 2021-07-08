@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "TicTacToeLogic.h"
 
-TEST(Board, TestBoardConfig)
+TEST(BoardTest, TestBoardConfig)
 {
 	tictactoe::IGame::Ptr logic = tictactoe::IGame::Produce();
 	logic->Init(3, 3);

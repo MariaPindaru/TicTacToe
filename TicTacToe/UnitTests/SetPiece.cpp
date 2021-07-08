@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "TicTacToeLogic.h"
 
-class SetPiece : public ::testing::Test
+class PlayerTest : public ::testing::Test
 {
     void SetUp() override
     {
@@ -15,14 +15,14 @@ public:
     tictactoe::IGame::Ptr logic;
 };
 
-TEST_F(SetPiece, TestSetX)
+TEST_F(PlayerTest, TestSetX)
 {
     logic->MakeMoveAt(0, 0);
 
     ASSERT_TRUE(logic->GetPieceAt(0,0) == tictactoe::Piece::X);
 }
 
-TEST_F(SetPiece, TestSetO)
+TEST_F(PlayerTest, TestSetO)
 {
 	logic->MakeMoveAt(1, 0);
 	logic->MakeMoveAt(0, 0);

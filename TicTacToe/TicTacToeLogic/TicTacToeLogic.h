@@ -22,14 +22,14 @@ public:
 
 	int GetBoardSize() const override;
 	std::string GetCurrentPlayer() const override;
-	 Piece GetPieceAt(int, int) const override;
+	 EPiece GetPieceAt(int, int) const override;
 
 	 void SetStrategy(EStrategy) override;
 	 //void SetStrategy(std::shared_ptr<IStrategy> newStrategy) override;
 
 	 EMoveResult MakeMoveAt(int, int) override;
 
-	 GameState GetGameState() const override;
+	 EGameState GetGameState() const override;
 
 private:
 	void CheckGameState(int, int);
@@ -41,8 +41,8 @@ private:
 	bool IsBoardFull();
 
 private:
-	std::vector<std::vector<Piece>> m_board;
-	GameState m_state;
+	std::vector<std::vector<EPiece>> m_board;
+	EGameState m_state;
 	int m_winCount;
 
 	Player m_firstPlayer;
