@@ -14,7 +14,7 @@ TEST(BoardTest, TestBoardConfig)
 	{
 		for (int column = 0; column < dim; ++column)
 		{
-			EXPECT_TRUE(logic->GetPieceAt(line, column) == tictactoe::Piece::None);
+			EXPECT_TRUE(logic->GetPieceAt(line, column) == tictactoe::EPiece::None);
 		}
 	}
 }

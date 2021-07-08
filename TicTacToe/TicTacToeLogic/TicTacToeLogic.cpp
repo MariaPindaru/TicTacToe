@@ -5,22 +5,25 @@
 
 
 TicTacToeLogic::TicTacToeLogic()
-	: m_state(GameState::None)
+	: m_state(EGameState::None)
 	, m_winCount(2)
+	, m_strategy(std::make_shared<EasyStrategy>())
+	, m_type(EGameType::SinglePlayer)
 {}
 
-void TicTacToeLogic::Init(int dim, int win)
+void TicTacToeLogic::Init(int dim, int win, EGameType type)
 {
 	if (dim < win || win < 2 || dim < 2)
 		throw "Invalid dimensions!";
 
 	for (int line = 0; line < dim; ++line)
 	{
-		std::vector<Piece> aux(dim, Piece::None);
+		std::vector<EPiece> aux(dim, EPiece::None);
 		m_board.push_back(aux);
 	}
 	m_winCount = win;
-	m_state = GameState::Playing;
+	m_state = EGameState::Playing;
+	m_type = type;
 }
 
 void TicTacToeLogic::SetFirstPlayer(const std::string& name)
@@ -54,7 +57,7 @@ std::string TicTacToeLogic::GetCurrentPlayer() const
 	return m_firstPlayer.GetIsMyTurn() ? m_firstPlayer.GetName() : m_secondPlayer.GetName();
 }
 
-tictactoe::Piece TicTacToeLogic::GetPieceAt(int line, int column) const
+tictactoe::EPiece TicTacToeLogic::GetPieceAt(int line, int column) const
 {
 	return m_board[line][column];
 }
@@ -63,10 +66,10 @@ void TicTacToeLogic::SetStrategy(EStrategy strategyType)
 {
 	switch (strategyType)
 	{
-	case EStrategy::EASY:
+	case EStrategy::Easy:
 		m_strategy = std::make_shared<EasyStrategy>();
 		break;
-	case EStrategy::MEDIUM:
+	case EStrategy::Medium:
 		m_strategy = std::make_shared<MediumStrategy>();
 		break;
 	default:
@@ -79,17 +82,31 @@ tictactoe::EMoveResult TicTacToeLogic::MakeMoveAt(int line, int column)
 	if (line < 0 || column < 0 || line >= m_board.size() || column >= m_board.size())
 		return tictactoe::EMoveResult::InvalidCoordinates;
 
-	if (m_board[line][column] != Piece::None)
+	if (m_board[line][column] != EPiece::None)
 		return tictactoe::EMoveResult::PositionOccupied;
 
-	m_board[line][column] = m_firstPlayer.GetIsMyTurn() ? Piece::X : Piece::O;
+	m_board[line][column] = m_firstPlayer.GetIsMyTurn() ? EPiece::X : EPiece::O;
 
 	CheckGameState(line, column);
+
+	if (m_state == EGameState::Playing && m_type == EGameType::SinglePlayer)
+	{
+		MakeMove();
+	}
 
 	return tictactoe::EMoveResult::Success;
 }
 
-tictactoe::GameState TicTacToeLogic::GetGameState() const
+tictactoe::EMoveResult TicTacToeLogic::MakeMove()
+{
+	std::pair<int, int> nextMove = m_strategy->GetMove(m_board, m_winCount);
+	m_board[nextMove.first][nextMove.second] = m_firstPlayer.GetIsMyTurn() ? EPiece::X : EPiece::O;
+
+	CheckGameState(nextMove.first, nextMove.second);
+	return tictactoe::EMoveResult::Success;
+}
+
+tictactoe::EGameState TicTacToeLogic::GetGameState() const
 {
 	return m_state;
 }
@@ -97,15 +114,16 @@ tictactoe::GameState TicTacToeLogic::GetGameState() const
 void TicTacToeLogic::CheckGameState(int line, int column)
 {
 	if (GameWon(line, column))
-		m_state = m_firstPlayer.GetIsMyTurn() ? GameState::XWon : GameState::OWon;
-	else if (IsBoardFull())
-		m_state = GameState::Draw;
+		m_state = m_firstPlayer.GetIsMyTurn() ? EGameState::XWon : EGameState::OWon;
 	else
-	{
-		m_state = GameState::Playing;
-		m_firstPlayer.ChangeTurn();
-		m_secondPlayer.ChangeTurn();
-	}
+		if (IsBoardFull())
+			m_state = EGameState::Draw;
+		else
+		{
+			m_state = EGameState::Playing;
+			m_firstPlayer.ChangeTurn();
+			m_secondPlayer.ChangeTurn();
+		}
 }
 
 bool TicTacToeLogic::GameWon(int lineIndex, int columnIndex)
@@ -120,7 +138,7 @@ bool TicTacToeLogic::GameWon(int lineIndex, int columnIndex)
 bool TicTacToeLogic::CheckColumn(int lineIndex, int columnIndex)
 {
 	int count = 0;
-	Piece piece = m_board[lineIndex][columnIndex];
+	EPiece piece = m_board[lineIndex][columnIndex];
 	for (int line = lineIndex; line >= 0; --line)
 	{
 		if (m_board[line][columnIndex] == piece)
@@ -145,7 +163,7 @@ bool TicTacToeLogic::CheckColumn(int lineIndex, int columnIndex)
 bool TicTacToeLogic::CheckLine(int lineIndex, int columnIndex)
 {
 	int count = 0;
-	Piece piece = m_board[lineIndex][columnIndex];
+	EPiece piece = m_board[lineIndex][columnIndex];
 	for (int column = columnIndex; column >= 0; --column)
 	{
 		if (m_board[lineIndex][column] == piece)
@@ -170,7 +188,7 @@ bool TicTacToeLogic::CheckLine(int lineIndex, int columnIndex)
 bool TicTacToeLogic::CheckRightDiagonal(int lineIndex, int columnIndex)
 {
 	int count = 0;
-	Piece piece = m_board[lineIndex][columnIndex];
+	EPiece piece = m_board[lineIndex][columnIndex];
 
 	for (int line = lineIndex, column = columnIndex; line >= 0 && column < m_board.size(); --line, ++column)
 	{
@@ -196,7 +214,7 @@ bool TicTacToeLogic::CheckRightDiagonal(int lineIndex, int columnIndex)
 bool TicTacToeLogic::CheckLeftDiagonal(int lineIndex, int columnIndex)
 {
 	int count = 0;
-	Piece piece = m_board[lineIndex][columnIndex];
+	EPiece piece = m_board[lineIndex][columnIndex];
 
 	for (int line = lineIndex, column = columnIndex; line < m_board.size() && column < m_board.size(); ++line, ++column)
 	{
@@ -226,7 +244,7 @@ bool TicTacToeLogic::IsBoardFull()
 	{
 		for (const auto& position : line)
 		{
-			if (position == Piece::None)
+			if (position == EPiece::None)
 				return false;
 		}
 	}

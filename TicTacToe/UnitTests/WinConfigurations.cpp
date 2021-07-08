@@ -46,7 +46,7 @@ TEST_F(LineOrColumnWinTest, TestLineXWin)
 {         
     logic->MakeMoveAt(0, 2);
 
-    ASSERT_TRUE(logic->GetGameState() == tictactoe::GameState::XWon);
+    ASSERT_TRUE(logic->GetGameState() == tictactoe::EGameState::XWon);
 }
 
 TEST_F(LineOrColumnWinTest, TestLineOWin)
@@ -54,7 +54,7 @@ TEST_F(LineOrColumnWinTest, TestLineOWin)
 	logic->MakeMoveAt(1, 2);
 	logic->MakeMoveAt(2, 0);
 
-	ASSERT_TRUE(logic->GetGameState() == tictactoe::GameState::OWon);
+	ASSERT_TRUE(logic->GetGameState() == tictactoe::EGameState::OWon);
 }
 
 TEST_F(LineOrColumnWinTest, TestColumnXWin)
@@ -63,7 +63,7 @@ TEST_F(LineOrColumnWinTest, TestColumnXWin)
     logic->MakeMoveAt(1, 1);
     logic->MakeMoveAt(2, 0);
 
-    ASSERT_TRUE(logic->GetGameState() == tictactoe::GameState::XWon);
+    ASSERT_TRUE(logic->GetGameState() == tictactoe::EGameState::XWon);
 }
 
 TEST_F(LineOrColumnWinTest, TestColumnOWin)
@@ -73,14 +73,14 @@ TEST_F(LineOrColumnWinTest, TestColumnOWin)
 	logic->MakeMoveAt(1, 1);
 	logic->MakeMoveAt(0, 2);
 
-	ASSERT_TRUE(logic->GetGameState() == tictactoe::GameState::OWon);
+	ASSERT_TRUE(logic->GetGameState() == tictactoe::EGameState::OWon);
 }
 
 TEST_F(DiagonalWinTest, TestRightDiagonalWin)
 {
     logic->MakeMoveAt(1, 1);
 
-    ASSERT_TRUE(logic->GetGameState() == tictactoe::GameState::XWon);
+    ASSERT_TRUE(logic->GetGameState() == tictactoe::EGameState::XWon);
 }
 
 TEST_F(DiagonalWinTest, TestLeftDiagonalWin)
@@ -88,7 +88,7 @@ TEST_F(DiagonalWinTest, TestLeftDiagonalWin)
 	logic->MakeMoveAt(1, 0);
 	logic->MakeMoveAt(1, 1);
 
-	ASSERT_TRUE(logic->GetGameState() == tictactoe::GameState::OWon);
+	ASSERT_TRUE(logic->GetGameState() == tictactoe::EGameState::OWon);
 }
 
 TEST(Draw, TestDraw)
@@ -105,5 +105,5 @@ TEST(Draw, TestDraw)
     for (int column = 0; column < 3; ++column)
         logic->MakeMoveAt(1, column);
 
-    ASSERT_TRUE(logic->GetGameState() == tictactoe::GameState::Draw);
+    ASSERT_TRUE(logic->GetGameState() == tictactoe::EGameState::Draw);
 }

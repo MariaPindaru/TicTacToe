@@ -13,7 +13,7 @@ class TicTacToeLogic : public IGame
 public:
 	TicTacToeLogic();
 
-	void Init(int, int) override;
+	void Init(int, int, EGameType) override;
 
 	void SetFirstPlayer(const std::string&) override;
 	void SetSecondPlayer(const std::string&) override;
@@ -40,9 +40,12 @@ private:
 	bool CheckLeftDiagonal(int, int);
 	bool IsBoardFull();
 
+	EMoveResult MakeMove() override;
+
 private:
 	std::vector<std::vector<EPiece>> m_board;
 	EGameState m_state;
+	EGameType m_type;
 	int m_winCount;
 
 	Player m_firstPlayer;

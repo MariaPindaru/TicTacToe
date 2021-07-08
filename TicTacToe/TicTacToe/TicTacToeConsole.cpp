@@ -3,18 +3,22 @@
 
 void TicTacToeConsole::Run()
 {
-	tictactoe::IGame::Ptr bussinesLogic = tictactoe::IGame::Produce();
+	tictactoe::IGame::Ptr bussinessLogic = tictactoe::IGame::Produce();
 
 	while (true)
 	{
 		int dim, winCount;
+		std::string option;
 		std::cout << "Board dimension: ";
 		std::cin >> dim;
 		std::cout << "Win count: ";
 		std::cin >> winCount;
+		std::cout << "VS computer? (y/n) ";
+		std::cin >> option;
+
 		try
 		{
-			bussinesLogic->Init(dim , winCount);
+			bussinessLogic->Init(dim , winCount, option == "y" ? tictactoe::EGameType::SinglePlayer : tictactoe::EGameType::TwoPlayers);
 			break;
 		}
 		catch (const char* exception)
@@ -23,6 +27,9 @@ void TicTacToeConsole::Run()
 			std::cerr << "Try again... " << std::endl;
 		}
 	}
+
+	// ...
+	bussinessLogic->SetStrategy(tictactoe::EStrategy::Medium);
 
 	std::string firstName, secondName;
 	std::cout << "First player: ";
@@ -34,36 +41,37 @@ void TicTacToeConsole::Run()
 		std::cin >> secondName;
 	} while (firstName == secondName);
 
-	bussinesLogic->SetFirstPlayer(firstName);
-	bussinesLogic->SetSecondPlayer(secondName);
+	bussinessLogic->SetFirstPlayer(firstName);
+	bussinessLogic->SetSecondPlayer(secondName);
 
-	PrintBoard(bussinesLogic);
+	PrintBoard(bussinessLogic);
 
-	while (bussinesLogic->GetGameState() == tictactoe::GameState::Playing)
+	while (bussinessLogic->GetGameState() == tictactoe::EGameState::Playing)
 	{
 		std::pair<int, int> pos;
 		do 
 		{
-			std::cout << bussinesLogic->GetCurrentPlayer() << ", it's your turn" << std::endl;
+			std::cout << bussinessLogic->GetCurrentPlayer() << ", it's your turn" << std::endl;
 			std::cout << "Select position: ";
 			std::cin >> pos.first >> pos.second;
-		} while (bussinesLogic->MakeMoveAt(pos.first, pos.second) != tictactoe::EMoveResult::Success);
+		} while (bussinessLogic->MakeMoveAt(pos.first, pos.second) != tictactoe::EMoveResult::Success);
 
 		system("cls");
-		PrintBoard(bussinesLogic);
+		PrintBoard(bussinessLogic);
 	}
 
-	switch (bussinesLogic->GetGameState())
+
+	switch (bussinessLogic->GetGameState())
 	{
 	default:
 		break;
-	case tictactoe::GameState::XWon:
-		std::cout << bussinesLogic->GetFirstPlayer() << " won!" << std::endl;
+	case tictactoe::EGameState::XWon:
+		std::cout << bussinessLogic->GetFirstPlayer() << " won!" << std::endl;
 		break;
-	case tictactoe::GameState::OWon:
-		std::cout << bussinesLogic->GetSecondPlayer() << " won!" << std::endl;
+	case tictactoe::EGameState::OWon:
+		std::cout << bussinessLogic->GetSecondPlayer() << " won!" << std::endl;
 		break;
-	case tictactoe::GameState::Draw:
+	case tictactoe::EGameState::Draw:
 		std::cout << "Draw! :)" << std::endl;
 		break;
 	}
@@ -80,10 +88,10 @@ void TicTacToeConsole::PrintBoard(tictactoe::IGame::Ptr bussinesLogic)
 			char aux;
 			switch (bussinesLogic->GetPieceAt(line, column))
 			{
-			case tictactoe::Piece::X:
+			case tictactoe::EPiece::X:
 				aux = 'X';
 				break;
-			case tictactoe::Piece::O:
+			case tictactoe::EPiece::O:
 				aux = 'O';
 				break;
 			default:

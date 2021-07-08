@@ -19,7 +19,7 @@ TEST_F(PlayerTest, TestSetX)
 {
     logic->MakeMoveAt(0, 0);
 
-    ASSERT_TRUE(logic->GetPieceAt(0,0) == tictactoe::Piece::X);
+    ASSERT_TRUE(logic->GetPieceAt(0,0) == tictactoe::EPiece::X);
 }
 
 TEST_F(PlayerTest, TestSetO)
@@ -27,5 +27,5 @@ TEST_F(PlayerTest, TestSetO)
 	logic->MakeMoveAt(1, 0);
 	logic->MakeMoveAt(0, 0);
 
-    ASSERT_TRUE(logic->GetPieceAt(0, 0) == tictactoe::Piece::O);
+    ASSERT_TRUE(logic->GetPieceAt(0, 0) == tictactoe::EPiece::O);
 }

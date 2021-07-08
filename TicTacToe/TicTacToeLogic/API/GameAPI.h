@@ -22,6 +22,12 @@ namespace tictactoe
 		Draw
 	};
 
+	enum class EGameType
+	{
+		SinglePlayer,
+		TwoPlayers
+	};
+
 	enum class EMoveResult
 	{
 		Success = 0,
@@ -40,7 +46,7 @@ namespace tictactoe
 	public:
 		virtual ~IStrategy() = default;
 
-		virtual std::pair<int, int> GetMove(const std::vector<std::vector<EPiece>>&) = 0;
+		virtual std::pair<int, int> GetMove(const std::vector<std::vector<EPiece>>&, int) = 0;
 	};
 
 	class IGame
@@ -48,7 +54,7 @@ namespace tictactoe
 	public:
 		using Ptr = std::shared_ptr<IGame>;
 		 
-		virtual void Init(int, int) = 0;
+		virtual void Init(int, int, EGameType) = 0;
 
 		virtual void SetFirstPlayer(const std::string&) = 0;
 		virtual void SetSecondPlayer(const std::string&) = 0;
@@ -64,6 +70,7 @@ namespace tictactoe
 		//virtual void SetStrategy(std::shared_ptr<IStrategy> newStrategy) = 0;
 
 		virtual EMoveResult MakeMoveAt(int, int) = 0;
+		virtual EMoveResult MakeMove() = 0;
 
 		static IGame::Ptr Produce();
 
