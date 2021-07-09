@@ -159,10 +159,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\a\Blabla.cpp" />
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="GameTypeTests.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MakeMoveTests.cpp" />
     <ClCompile Include="MockStrategy.cpp" />
     <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="SetPiece.cpp" />
