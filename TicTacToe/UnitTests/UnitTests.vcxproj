@@ -164,6 +164,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="SetPiece.cpp" />
+    <ClCompile Include="StrategyTests.cpp" />
     <ClCompile Include="WinConfigurations.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

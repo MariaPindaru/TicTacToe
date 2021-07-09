@@ -40,7 +40,7 @@ private:
 	bool CheckLeftDiagonal(int, int);
 	bool IsBoardFull();
 
-	EMoveResult MakeMove() override;
+	EMoveResult MakeMove();
 
 private:
 	std::vector<std::vector<EPiece>> m_board;

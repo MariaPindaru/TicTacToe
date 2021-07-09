@@ -70,7 +70,6 @@ namespace tictactoe
 		virtual void SetStrategy(std::shared_ptr<IStrategy> newStrategy) = 0;
 
 		virtual EMoveResult MakeMoveAt(int, int) = 0;
-		virtual EMoveResult MakeMove() = 0;
 
 		static IGame::Ptr Produce();
 
