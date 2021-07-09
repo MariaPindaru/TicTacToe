@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include ".\GameAPI.h"
+#include "API\GameAPI.h"
 
 using namespace tictactoe;
 

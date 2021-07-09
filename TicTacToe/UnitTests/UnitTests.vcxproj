@@ -96,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include; ; ..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include; ; ..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include; ; ..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,7 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TicTacToeLogic; ..\ThirdParty\googletest-master\googletest-master\googletest\include; ; ..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,13 +159,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\a\Blabla.cpp" />
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="GameTypeTests.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MockStrategy.cpp" />
     <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="SetPiece.cpp" />
-    <ClCompile Include="StrategyTests.cpp" />
     <ClCompile Include="WinConfigurations.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MockStrategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

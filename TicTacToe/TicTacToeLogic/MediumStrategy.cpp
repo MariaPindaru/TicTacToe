@@ -26,7 +26,7 @@ std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictac
 				break;
 			}
 
-	tictactoe::EPiece pieceToPlace = x > o ? tictactoe::EPiece::O : tictactoe::EPiece::X;
+	tictactoe::EPiece pieceToPlace = x > o ? tictactoe::EPiece::X : tictactoe::EPiece::O;
 
 	//line
 	for (int line = 0; line < board.size(); ++line)
@@ -34,7 +34,7 @@ std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictac
 		int count = 0;
 		for (int column = 0; column < board.size(); ++column)
 		{
-			if (board[line][column] != pieceToPlace && board[line][column] != tictactoe::EPiece::None)
+			if (board[line][column] == pieceToPlace)
 				++count;
 			else
 				count = 0;
@@ -44,7 +44,7 @@ std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictac
 				if (column < board.size() - 1 && board[line][column + 1] == tictactoe::EPiece::None)
 					return std::make_pair(line, column + 1);
 
-				if (column == board.size() - 1 && board[line][column - count] == tictactoe::EPiece::None)
+				if (column - count >= 0 && board[line][column - count] == tictactoe::EPiece::None)
 					return std::make_pair(line, column - count);
 
 				break;
@@ -58,7 +58,7 @@ std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictac
 		int count = 0;
 		for (int line = 0; line < board.size(); ++line)
 		{
-			if (board[line][column] != pieceToPlace && board[line][column] != tictactoe::EPiece::None)
+			if (board[line][column] == pieceToPlace)
 				++count;
 			else
 				count = 0;
@@ -68,7 +68,7 @@ std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictac
 				if (line < board.size() - 1 && board[line + 1][column] == tictactoe::EPiece::None)
 					return std::make_pair(line + 1, column);
 
-				if (line == board.size() - 1 && board[line - count][column] == tictactoe::EPiece::None)
+				if (line -count >= 0 && board[line - count][column] == tictactoe::EPiece::None)
 					return std::make_pair(line - count, column);
 
 				break;
@@ -81,12 +81,12 @@ std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictac
 	{
 		for (int column = 0; column < board.size(); ++column)
 		{
-			if (board[line][column] != pieceToPlace && board[line][column] != tictactoe::EPiece::None)
+			if (board[line][column] == pieceToPlace)
 			{
 				int count = 1;
 				for (int aux = 1; line + aux < board.size() && column + aux < board.size(); ++aux)
 				{
-					if (board[line + aux][column + aux] != pieceToPlace && board[line + aux][column + aux] != tictactoe::EPiece::None)
+					if (board[line + aux][column + aux] == pieceToPlace)
 						++count;
 					else
 						count = 0;
@@ -106,7 +106,7 @@ std::pair<int, int> MediumStrategy::GetMove(const std::vector<std::vector<tictac
 				count = 1;
 				for (int aux = 1; line + aux < board.size() && column - aux > 0; ++aux)
 				{
-					if (board[line + aux][column - aux] != pieceToPlace && board[line + aux][column - aux] != tictactoe::EPiece::None)
+					if (board[line + aux][column - aux] == pieceToPlace)
 						++count;
 					else
 						count = 0;

@@ -96,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest; ..\ThirdParty\googletest-master\googletest-master\googlemock;..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest; ..\ThirdParty\googletest-master\googletest-master\googlemock;..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest; ..\ThirdParty\googletest-master\googletest-master\googlemock;..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ThirdParty\googletest-master\googletest-master\googletest\include;..\ThirdParty\googletest-master\googletest-master\googletest; ..\ThirdParty\googletest-master\googletest-master\googlemock;..\ThirdParty\googletest-master\googletest-master\googlemock\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +151,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-actions.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-cardinalities.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-function-mocker.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-matchers.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-more-actions.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-more-matchers.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-nice-strict.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-spec-builders.h" />
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock.h" />
     <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googletest\include\gtest\gtest-death-test.h" />
     <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googletest\include\gtest\gtest-matchers.h" />
     <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googletest\include\gtest\gtest-message.h" />
@@ -164,6 +173,7 @@
     <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googletest\include\gtest\gtest_prod.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ThirdParty\googletest-master\googletest-master\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\ThirdParty\googletest-master\googletest-master\googletest\src\gtest-all.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

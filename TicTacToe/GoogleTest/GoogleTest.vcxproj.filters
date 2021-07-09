@@ -48,9 +48,39 @@
     <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googletest\include\gtest\gtest-typed-test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-actions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-cardinalities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-function-mocker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-matchers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-more-actions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-more-matchers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-nice-strict.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\googletest-master\googletest-master\googlemock\include\gmock\gmock-spec-builders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\googletest-master\googletest-master\googletest\src\gtest-all.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\googletest-master\googletest-master\googlemock\src\gmock-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
